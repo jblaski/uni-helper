@@ -2,14 +2,12 @@ package com.julianblaskiewicz.unihelper.controller;
 
 import com.julianblaskiewicz.unihelper.entity.LearningProvider;
 import com.julianblaskiewicz.unihelper.repository.LearningProviderRepository;
-import com.julianblaskiewicz.unihelper.service.LearningProviderServiceImplementation;
-import lombok.extern.slf4j.Slf4j;
+import com.julianblaskiewicz.unihelper.service.LearningProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,12 +15,8 @@ public class LearningProviderController {
 
     LearningProviderRepository repository;
 
-    LearningProviderServiceImplementation service;
-
-    LearningProviderController(@Autowired LearningProviderRepository learningProviderRepository,
-                               @Autowired LearningProviderServiceImplementation learningProviderServiceImplementation) {
+    LearningProviderController(@Autowired LearningProviderRepository learningProviderRepository) {
         this.repository = learningProviderRepository;
-        this.service = learningProviderServiceImplementation;
     }
 
     // e.g. http://localhost:8080/api/learningprovider?id=10007768
@@ -36,15 +30,8 @@ public class LearningProviderController {
         return learningProvider.get();
     }
 
-    //TODO move to own controller? Not sure
-    @GetMapping(value = "api/closestlearningprovider", produces = "application/json")
-    @ResponseBody
-    public List<LearningProvider> getClosest(@RequestParam String cityName) {
-        return service.findLearningProviderByProximityToCity(cityName, 3);
-    }
-
     @DeleteMapping("api/learningprovider/{id}")
-    void deleteEmployee(@PathVariable long id) {
+    void deleteLearningProvider(@PathVariable long id) {
         repository.deleteById(id);
     }
 }

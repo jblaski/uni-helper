@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface LearningProviderServiceInterface {
 
-    public List<LearningProvider> findLearningProviderByProximityToCity(String cityName, int numberToReturn);
+    public List<LearningProvider> findLearningProvidersByProximityToCity(String cityName, int numberToReturn);
 }
