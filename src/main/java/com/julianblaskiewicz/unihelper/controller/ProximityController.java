@@ -26,7 +26,6 @@ public class ProximityController {
     @GetMapping(value = "api/proximity", produces = "application/json")
     @ResponseBody
     public List<LearningProvider> getClosest(@RequestParam Map<String, String> parameters) throws Exception {
-        log.info(parameters.toString());
         if (parameters.containsKey("cityName") && parameters.containsKey("count")) {
             int count = Integer.parseInt(parameters.get("count"));
             return service.findLearningProvidersByProximityToCity(parameters.get("cityName"), count);
