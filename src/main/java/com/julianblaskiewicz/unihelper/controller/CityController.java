@@ -2,6 +2,7 @@ package com.julianblaskiewicz.unihelper.controller;
 
 import com.julianblaskiewicz.unihelper.entity.City;
 import com.julianblaskiewicz.unihelper.entity.LearningProvider;
+import com.julianblaskiewicz.unihelper.exception.ResourceNotFoundException;
 import com.julianblaskiewicz.unihelper.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,17 +22,13 @@ public class CityController {
 
     @GetMapping(value = "api/city", produces = "application/json")
     @ResponseBody
-    public City getCityById(@RequestParam long id) {
-        Optional<City> city = repository.findById(id);
-        if(!city.isPresent()) throw new ResponseStatusException( //TODO Custom error controller, to show message
-                HttpStatus.NOT_FOUND, "City couldn't be found!"
-        );
-        return city.get();
+    public City getCityById(@RequestParam Long id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id.toString(), "city"));
     }
 
     @DeleteMapping("api/city/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteEmployee(@PathVariable long id) {
+    void deleteEmployee(@PathVariable Long id) {
         repository.deleteById(id);
     }
 
