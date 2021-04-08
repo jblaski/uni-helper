@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <header className="Search-area">
         <p>welcome to uni-helper!</p>
-        <p>search for a town below:</p>
+        <p>search for a town:</p>
       
         <Autocomplete
           id="combo-box-demo"
