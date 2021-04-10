@@ -21,7 +21,7 @@ class App extends Component {
         console.log('This is your data', data)
         this.setState({
           cities: data,
-      });
+        });
       });
   }
 
