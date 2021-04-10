@@ -15,6 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     const citiesUrl = 'http://localhost:8080/api/cities';
+    
     fetch(citiesUrl)
       .then((response) => response.json())
       .then((data) => {
