@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class CityController {
 
@@ -20,6 +22,13 @@ public class CityController {
     @ResponseBody
     public City getCityById(@PathVariable Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", id.toString(), "city"));
+    }
+
+    @GetMapping(value = "api/cities", produces = "application/json")
+    @CrossOrigin
+    @ResponseBody
+    public List<City> getAllCities() {
+        return repository.findAll();
     }
 
     @DeleteMapping("api/city/{id}")
