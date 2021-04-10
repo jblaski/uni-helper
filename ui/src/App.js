@@ -1,33 +1,56 @@
-import logo from './logo.svg';
 import './App.css';
-import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button'
 import Autocomplete from '@material-ui/lab/Autocomplete';
-function App() {
+import { Component } from 'react';
+class App extends Component {
 
-  // Will get these from API
-  const top100Films = [
-    { title: 'London', year: 1994 },
-    { title: 'Birmingham', year: 1972 },
-    { title: 'Bristol', year: 1974 },
-  ];
+  constructor() {
+    super();
+    this.state = {
+        cities: [],
+        showButton: false,
+    };
+  }
 
-  return (
-    <div className="App">
+  componentDidMount() {
+    const citiesUrl = 'http://localhost:8080/api/cities';
+    fetch(citiesUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('This is your data', data)
+        this.setState({
+          cities: data,
+      });
+      });
+  }
+
+  render() {
+    return <div className="App">
       <header className="Search-area">
         <p>welcome to uni-helper!</p>
         <p>search for a town:</p>
       
         <Autocomplete
           id="combo-box-demo"
-          options={top100Films}
-          getOptionLabel={(option) => option.title}
+          options={this.state.cities}
+          getOptionLabel={(option) => option.cityName}
           style={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Town" variant="outlined" />}
+          // value={value}
+          // onChange={(event, newValue) => {
+          //   setValue(newValue);
+          // }}
+          // inputValue={inputValue}
+          // onInputChange={(event, newInputValue) => {
+          //   setInputValue(newInputValue);
+          // }}
         />
+
+        {this.state.showButton && <Button>Search</Button>}
       </header>
     </div>
-  );
+    }
 }
 
 export default App;
