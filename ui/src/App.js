@@ -3,14 +3,20 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Component } from 'react';
+import searchImg from './search.png'
+import uniImg from './mortarboard.png'
 class App extends Component {
 
+  
   constructor() {
     super();
     this.state = {
         cities: [],
         showButton: false,
+        value: null,
+        inputValue: null,
     };
+    
   }
 
   componentDidMount() {
@@ -29,6 +35,11 @@ class App extends Component {
   render() {
     return <div className="App">
       <header className="Search-area">
+        <div>
+          <img src={searchImg} className="Logo" alt="magnifying glass" />
+          <img src={uniImg} className="Logo" alt="mortarboard" />
+        </div>
+
         <p>welcome to uni-helper!</p>
         <p>search for a town:</p>
       
@@ -38,17 +49,19 @@ class App extends Component {
           getOptionLabel={(option) => option.cityName}
           style={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Town" variant="outlined" />}
-          // value={value}
-          // onChange={(event, newValue) => {
-          //   setValue(newValue);
-          // }}
-          // inputValue={inputValue}
-          // onInputChange={(event, newInputValue) => {
-          //   setInputValue(newInputValue);
-          // }}
+           onChange={(event, newValue) => {
+             this.setState({value: newValue});
+             this.setState({showButton: true}); 
+           }}
+           onInputChange={(event, newInputValue) => {
+             this.setState({inputValue: newInputValue});
+           }}
         />
 
-        {this.state.showButton && <Button>Search</Button>}
+        {this.state.showButton && <Button size="large" color="primary">Search</Button>}
+
+        <div>{`value: ${this.state.value !== null ? `${this.state.value}` : 'null'}`}</div>
+        <div>{`inputValue: ${this.state.inputValue}`}</div>
       </header>
     </div>
     }

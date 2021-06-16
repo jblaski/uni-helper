@@ -8,6 +8,7 @@
 
 # Custom stuff
 /data
+/.idea
 
 # User-specific stuff
 .idea/**/workspace.xml

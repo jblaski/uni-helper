@@ -3,7 +3,7 @@
 }
 
 .Search-area {
-  background-color: rgb(163, 163, 163);
+  background-color: ghostwhite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,4 +11,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #282c34
+}
+
+.Logo {
+  max-width: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: left;
 }
