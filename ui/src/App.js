@@ -58,7 +58,7 @@ class App extends Component {
            }}
         />
 
-        {this.state.showButton && <Button size="large" color="primary">Search</Button>}
+        {this.state.showButton && <Button className="btn" size="large" color="primary">Search</Button>}
 
         <div>{`value: ${this.state.value !== null ? `${this.state.value}` : 'null'}`}</div>
         <div>{`inputValue: ${this.state.inputValue}`}</div>
